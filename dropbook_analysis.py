@@ -31,40 +31,21 @@ total_hobbies_count = len(merged_dropbook_hobbies)
 print "SF Dropboxers boast a whopping " + str(total_hobbies_count) + " hobbies! Yeehaw!"
 
 all_dropbook_hobbies_listed = hobbies_lowercase
-print all_dropbook_hobbies_listed
+all_dropbook_hobbies_listed
 
 # count number of times each hobby is listed as such by Dropboxers
 hobbies_by_count = Counter(all_dropbook_hobbies_listed)
-print hobbies_by_count
+hobbies_by_count
 '''
-Go back to this and print in different format.
+Go back to this and print in different format ('vertical', CSV-type list).
 '''
 
 # count top ten most common hobbies among Dropboxers
-
-
-
-
-
-
-
-'''
-# count number of Dropboxers that listed each hobby
-hobbies_ranked = Counter(all_dropbook_hobbies).
-print "Hobby breakdown by the numbers: ", hobbies_by_count
-
-
-
-
-
-
-# count ten most popular hobbies among SF dropboxers
-hobbies_ranked = Counter(all_dropbook_hobbies).most_common(10)
+hobbies_ranked = Counter(all_dropbook_hobbies_listed).most_common(10)
 top_ten = [x[0] for x in hobbies_ranked]
-
-print "The ten most popular hobbies at Dropbox are:"
+print "The top ten most popular hobbies at Dropbox HQ are: "
 for hobby in top_ten:
     print hobby
 
+# print the top hobby among SF Dropboxers
 print "The most popular hobby at Dropbox is " + top_ten[0] + "."
-'''
