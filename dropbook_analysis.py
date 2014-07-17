@@ -34,14 +34,17 @@ all_dropbook_hobbies_listed = hobbies_lowercase
 all_dropbook_hobbies_listed
 
 # count number of times each hobby is listed as such by Dropboxers
-hobbies_by_count = Counter(all_dropbook_hobbies_listed)
-hobbies_by_count
-'''
-Go back to this and print in different format ('vertical', CSV-type list).
-'''
+hobbies_by_count = Counter(all_dropbook_hobbies_listed).most_common()
+
+# print hobbies_by_count
+ordered_hobbies_dict = hobbies_by_count
+print "The following numbers of Dropboxers listed these hobbies: "
+for key, value in ordered_hobbies_dict:
+    print key, value
 
 # count top ten most common hobbies among Dropboxers
 hobbies_ranked = Counter(all_dropbook_hobbies_listed).most_common(10)
+
 top_ten = [x[0] for x in hobbies_ranked]
 print "The top ten most popular hobbies at Dropbox HQ are: "
 for hobby in top_ten:
