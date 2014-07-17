@@ -1,22 +1,40 @@
 #!/usr/bin/env python
-
-import json
 from collections import Counter
 from compiler.ast import flatten
-import itertools
 
-people_list = json.load(open('dropbook_output.json', 'r'))
+import itertools
+import json
+import sys
+
+script, filename = sys.argv
+
+people_list = json.load(open(filename, 'r'))
 
 # make array with all values for key 'hobbies' in dropbook dicts
 hobbies = [p['hobbies'] for p in people_list['users']]
 
-# render one list with all hobbies listed, print in lowercase to merge dupes
+# render one list with all hobbies listed, print in lowercase so we can group duplicates
 hobbies_list = flatten(hobbies)
-all_dropbook_hobbies = [x.lower() for x in hobbies_list]
+hobbies_lowercase = [x.lower() for x in hobbies_list]
 
-total_count = len(all_dropbook_hobbies)
-print "SF Dropboxers boast a whopping " + str(total_count) + " hobbies! Sick brah!"
+# remove duplicate hobbies due to changing uppercase entries to lowercase
+def remove_duplicates(l):
+    return list(set(l))
+remove_duplicates(hobbies_lowercase)
+all_dropbook_hobbies = remove_duplicates(hobbies_lowercase)
 
+total_hobbies_count = len(all_dropbook_hobbies)
+print "SF Dropboxers boast a whopping " + str(total_hobbies_count) + " hobbies! Yeehaw!"
+
+# count number of Dropboxers that listed each hobby
+hobbies_ranked = Counter(all_dropbook_hobbies).
+print "Hobby breakdown by the numbers: ", hobbies_by_count
+
+
+
+
+
+'''
 # count ten most popular hobbies among SF dropboxers
 hobbies_ranked = Counter(all_dropbook_hobbies).most_common(10)
 top_ten = [x[0] for x in hobbies_ranked]
@@ -26,3 +44,4 @@ for hobby in top_ten:
     print hobby
 
 print "The most popular hobby at Dropbox is " + top_ten[0] + "."
+'''
