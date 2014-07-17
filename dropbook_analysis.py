@@ -6,7 +6,7 @@ import itertools
 import json
 import sys
 
-script, filename = sys.argv
+script, filename, n = sys.argv
 
 people_list = json.load(open(filename, 'r'))
 
