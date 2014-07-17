@@ -17,15 +17,38 @@ hobbies = [p['hobbies'] for p in people_list['users']]
 hobbies_list = flatten(hobbies)
 hobbies_lowercase = [x.lower() for x in hobbies_list]
 
-# remove duplicate hobbies due to changing uppercase entries to lowercase
+# remove duplicate hobbies to ascertain correct count of hobbies listd by Dropboxers
 def remove_duplicates(l):
     return list(set(l))
 remove_duplicates(hobbies_lowercase)
-all_dropbook_hobbies = remove_duplicates(hobbies_lowercase)
 
-total_hobbies_count = len(all_dropbook_hobbies)
+# call function on hobbies_lowercase
+merged_dropbook_hobbies = remove_duplicates(hobbies_lowercase)
+
+# print all_dropbook_hobbies: flattened, lowercase, dupes merged
+
+total_hobbies_count = len(merged_dropbook_hobbies)
 print "SF Dropboxers boast a whopping " + str(total_hobbies_count) + " hobbies! Yeehaw!"
 
+all_dropbook_hobbies_listed = hobbies_lowercase
+print all_dropbook_hobbies_listed
+
+# count number of times each hobby is listed as such by Dropboxers
+hobbies_by_count = Counter(all_dropbook_hobbies_listed)
+print hobbies_by_count
+'''
+Go back to this and print in different format.
+'''
+
+# count top ten most common hobbies among Dropboxers
+
+
+
+
+
+
+
+'''
 # count number of Dropboxers that listed each hobby
 hobbies_ranked = Counter(all_dropbook_hobbies).
 print "Hobby breakdown by the numbers: ", hobbies_by_count
@@ -34,7 +57,7 @@ print "Hobby breakdown by the numbers: ", hobbies_by_count
 
 
 
-'''
+
 # count ten most popular hobbies among SF dropboxers
 hobbies_ranked = Counter(all_dropbook_hobbies).most_common(10)
 top_ten = [x[0] for x in hobbies_ranked]
