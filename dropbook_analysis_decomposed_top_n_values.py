@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 from collections import Counter
 from compiler.ast import flatten
 
@@ -9,42 +8,35 @@ import sys
 
 def main():
 
-    script, filename = sys.argv
+    script, filename, n = sys.argv
 
     people_list = json.load(open(filename, 'r'))
     arbitrary_list = people_list['users']
+    field_names = parse_field_names(arbitrary_list)  
 
-    parse_field_names(arbitrary_list)
+    print_top_n(field_names, arbitrary_list, int(n))
 
-    # print_field_items(field_names, arbitrary_list)
-
-def parse_field_names(arbitrary_list):
-    '''
-    Given the field names in a dictionary, returns those field names. 
-    '''
+def parse_field_names(arbitrary_list): # TODO: Write a docstring
     field_names = set()
     for arbitrary_dict in arbitrary_list:
         for key in arbitrary_dict.keys():
             field_names.add(key)
-    print "The field names are as follows: " + ", ".join(str(x) for x in field_names) + "."
+    return field_names
 
-def print_field_items(field_names, arbitrary_list):
-
-    
-if __name__ == '__main__':
-    main()
-
-
-'''
-def print_field_items(field_names, arbitrary_list):
-    
+def print_top_n(field_names, arbitrary_list, n):
+    '''
     Given the field names in an arbitrary list, prints the top-n most frequently
     occurring items for each field.
-  
+    '''
     for field_name in field_names:
-        print "The items for " + field_name + " are: "
+        top_n_field_values = compute_top_n(field_name, arbitrary_list, n)
+        print "The top " + str(n) + " values for " + field_name + " are: ", top_n_field_values
 
-    
+def compute_top_n(field_name, arbitrary_list, n): 
+    '''
+    Given the name of a field in a particular list, computes top ten most frequently
+    occurring items for that field.
+    ''' 
 
     # getting all of the values for a given field_name
     field_content = [p[field_name] for p in arbitrary_list]
@@ -61,33 +53,11 @@ def print_field_items(field_names, arbitrary_list):
     top_n = [x[0] for x in field_items_ranked]
     return top_n
 
+if __name__ == '__main__':
+    main()
 
 
-
-
-
-
-
-
-
-
-
-
-for each field name, print out all values 
-for each field name, write to csv file for that field
-
-ideal CSV format:
-
-hobbies.csv
-
-hiking 3 
-biking 2
-
-organization.csv
-
-tuck shop 50
-engineering 40
-design 20
-
-etc.
-'''
+# for each field name, print out all values 
+# for each field name, write to csv file for that field
+# hobbies.csv, etc. 
+# remove n value scheme
