@@ -16,7 +16,7 @@ def main():
 
     print_top_n(field_names, arbitrary_list, int(n))
 
-def parse_field_names(arbitrary_list): # TODO: Write a docstring
+def parse_field_names(arbitrary_list):
     field_names = set()
     for arbitrary_dict in arbitrary_list:
         for key in arbitrary_dict.keys():
