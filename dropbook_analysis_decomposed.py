@@ -14,10 +14,9 @@ def main():
     people_list = json.load(open(filename, 'r'))
     arbitrary_list = people_list['users']
     field_names = parse_field_names(arbitrary_list)
-    # field_items = parse_field_items(field_names, arbitrary_list)
 
-    print 'We are parsing files!'
     parse_field_items(field_names, arbitrary_list)
+    print_field_content(field_names, arbitrary_list)
 
 def parse_field_names(arbitrary_list):
 
@@ -28,6 +27,7 @@ def parse_field_names(arbitrary_list):
     for arbitrary_dict in arbitrary_list:
         for key in arbitrary_dict.keys():
             field_names.add(key)
+    return field_names
     # print "The field names in " + " are as follows: " + ", ".join(str(x) for x in field_names) + "."
 
 def parse_field_items(field_names, arbitrary_list):
@@ -37,22 +37,29 @@ def parse_field_items(field_names, arbitrary_list):
     '''
     # must get all of the values for a given field name
     for field_name in field_names:
-        field_content = [d[field_name] for d in arbitrary_list]
+        field_content = [dictionary[field_name] for dictionary in arbitrary_list]
         all_field_items = []
         field_content_list = flatten(field_content)
         for x in field_content_list:
             if x is not None:
                 all_field_items.append(x)
-    print all_field_items
+    return all_field_items
+
+def print_field_content(field_names, arbitrary_list):
+    '''
+    Print out all field names followed by colon and all field items for that category.
+    '''
+    for field_name in field_names:
+        field_content = [dictionary[field_name] for dictionary in arbitrary_list]
+        print field_name
 
 if __name__ == '__main__':
     main()
 
 
 '''
-TODO : Action items
+TODO
 
-for each field name, print out all values 
 for each field name, write to csv file for that field
 
 ideal CSV format:
