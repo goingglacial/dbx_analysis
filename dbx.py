@@ -64,7 +64,7 @@ def compute_field_item_count(field_name, category_field_items, arbitrary_list):
     #     print x, field_items_ranked[x]
 
 def write_to_csv(field_name, field_items_ranked, arbitrary_list):
-    writer = csv.writer(open('dbx.csv', 'wb'))
+    writer = csv.writer(open('field_name.csv', 'wb'))
     for key, value in field_items_ranked.items():
         writer.writerow([key, value])
 
