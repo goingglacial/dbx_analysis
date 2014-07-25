@@ -32,7 +32,7 @@ def print_top_n(field_names, arbitrary_list, n):
         top_n_field_values = compute_top_n(field_name, arbitrary_list, n)
         print "The top " + str(n) + " values for " + field_name + " are: ", top_n_field_values
 
-def compute_top_n(field_name, arbitrary_list, n): 
+def compute_top_n(field_name, arbitrary_list, n):
     '''
     Given the name of a field in a particular list, computes top ten most frequently
     occurring items for that field.
