@@ -23,6 +23,7 @@ def main():
         field_items_ranked = compute_field_item_count(field_name, category_field_items, arbitrary_list)
         # for each field name, write field items and respective counts to individual csv file
         write_to_csv(field_name, field_items_ranked, arbitrary_list)
+        print field_name
 
 def parse_field_names(arbitrary_list):
     '''
@@ -69,10 +70,13 @@ def write_to_csv(field_name, field_items_ranked, arbitrary_list):
     For each field name, write a CSV with field items and 
     count of field items.
     '''
-    writer = csv.writer(open('dbx.csv', 'wb'))
+    writer = csv.writer(open('%s.csv' % field_name, 'wb'))
     # dict.items() returns (key, value) tuples
     for key, value in field_items_ranked.items():
+        key = unicode(key)
+        value = unicode(value)
         writer.writerow([key, value])
+        # writer.writerow([str(key).encode('utf-8'), str(value).encode('utf-8')])
 
 if __name__ == '__main__':
     main()
